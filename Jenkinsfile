@@ -11,7 +11,8 @@ fi'''
 
     stage('build') {
       steps {
-        sh '''docker run --rm -v "$PWD":/server -v /cache/"$CACHE":/server/node_modules -w /server node:onbuild npm install 
+        sh '''ls
+docker run --rm -v "$PWD":/server -v /cache/"$CACHE":/server/node_modules -w /server node:onbuild npm install 
 && cp -rf /cache/"$CACHE" node_modules 
 && docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .
 '''

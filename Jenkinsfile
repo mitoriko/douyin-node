@@ -3,17 +3,21 @@ pipeline {
   stages {
     stage('set-cache') {
       steps {
-        sh '''if [ ! -d "/cache/"$CACHE"" ];then
-mkdir /cache/"$CACHE";
-fi'''
+        sh '''if [ ! -d "/home/docker/build-cache/"$CACHE"" ];then
+mkdir /home/docker/build-cache/"$CACHE";
+fi
+export CACHE=/home/docker/build-cache/"$CACHE"
+echo "$CACHE"
+
+echo ${"$PWD"/\\/var\\/jenkins_home/\\/home\\/docker\\/jenkins}'''
       }
     }
 
     stage('build') {
       steps {
         sh '''echo "$PWD"
-docker run --rm -v "$PWD":/app -v /cache/"$CACHE":/app/node_modules -w /app node:onbuild ls'''
-        sh '''cp -rf /cache/"$CACHE" node_modules 
+docker run --rm -v "$PWD":/app -v "$CACHE":/app/node_modules -w /app node:onbuild ls'''
+        sh '''cp -rf $CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
       }
     }

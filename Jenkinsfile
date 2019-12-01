@@ -9,7 +9,7 @@ fi
 export CACHE=/home/docker/build-cache/"$CACHE"
 echo "$CACHE"
 
-echo ${"$PWD"/"/var/jenkins_home"/"/home/docker/jenkins"}'''
+echo ${"$PWD"//var/jenkins_home//home/docker/jenkins}'''
       }
     }
 

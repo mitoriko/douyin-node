@@ -12,7 +12,7 @@ fi'''
     stage('build') {
       steps {
         sh '''ls
-docker run --rm -v "$PWD":/app  -w /app node:onbuild ls && npm install 
+docker run --rm -v .:/app -v /cache/"$CACHE":/app/node_modules -w /app node:onbuild ls && npm install 
 '''
         sh '''cp -rf /cache/"$CACHE" node_modules 
 && docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''

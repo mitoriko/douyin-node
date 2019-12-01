@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''docker run -it --rm -v /home/docker/dy/douyin-node:/server -w /server node:onbuild npm install
+        sh '''docker run --rm -v /home/docker/dy/douyin-node:/server -w /server node:onbuild npm install
 '''
       }
     }

@@ -4,7 +4,8 @@ pipeline {
     stage('set-cache') {
       steps {
         sh '''if [ ! -d "/home/docker/build-cache/douyin-node" ];then
-mkdir /home/docker/build-cache/douyin-node'''
+mkdir /home/docker/build-cache/douyin-node;
+fi'''
       }
     }
 

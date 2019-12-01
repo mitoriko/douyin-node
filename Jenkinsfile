@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''docker run --rm -v /home/docker/dy/douyin-node:/server -w /server node:onbuild npm install
-docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .
+        sh '''docker run --rm -v "$PWD":/server -v /home/docker/build-cache/node_modules:/server/node_modules -w /server node:onbuild npm install && docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .
 '''
       }
     }

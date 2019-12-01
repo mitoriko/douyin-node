@@ -3,16 +3,16 @@ pipeline {
   stages {
     stage('set-cache') {
       steps {
-        sh '''if [ ! -d "/home/docker/build-cache/douyin-node" ];then
-mkdir /home/docker/build-cache/douyin-node;
+        sh '''if [ ! -d "/cache/"$CACHE"" ];then
+mkdir /cache/"$CACHE";
 fi'''
       }
     }
 
     stage('build') {
       steps {
-        sh '''docker run --rm -v "$PWD":/server -v /home/docker/build-cache/douyin-node:/server/node_modules -w /server node:onbuild npm install 
-&& cp -rf /home/docker/build-cache/douyin-node node_modules
+        sh '''docker run --rm -v "$PWD":/server -v /cache/"$CACHE":/server/node_modules -w /server node:onbuild npm install 
+&& cp -rf /cache/"$CACHE" node_modules
 && docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .
 '''
       }
@@ -31,5 +31,6 @@ fi'''
     REGISTRY_IMAGE = 'a-cubic/douyin-node'
     DOCKER_USERNAME = 'a_cubic_cloud'
     DOCKER_PASSWORD = 'Lh82625001'
+    CACHE = 'douyin-node'
   }
 }

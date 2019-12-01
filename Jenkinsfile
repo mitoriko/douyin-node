@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('set-cache') {
       steps {
-        sh '''if [ ! -d "/home/docker/build-cache/"$CACHE"" ];then
-mkdir /home/docker/build-cache/"$CACHE";
+        sh '''if [ ! -d "/cache/"$CACHE"" ];then
+mkdir /cache/"$CACHE";
 fi
 export CACHE=/home/docker/build-cache/"$CACHE"
 echo "$CACHE"

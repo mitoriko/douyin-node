@@ -18,7 +18,7 @@ echo "$REAL_PATH"'''
 
     stage('build') {
       steps {
-        sh '''echo "$PWD"
+        sh '''echo "$REAL_PATH"
 docker run --rm -v "$REAL_PATH":/app -v "$CACHE":/app/node_modules -w /app node:onbuild ls'''
         sh '''cp -rf $CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
@@ -39,6 +39,6 @@ docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
     DOCKER_USERNAME_USR = 'credentials(\'Docker_Push\')'
     DOCKER_PASSWORD_PSW = 'credentials(\'Docker_Push\')'
     CACHE = 'douyin-node'
-    REAL_PATH = ''
+    REAL_PATH = '\'\''
   }
 }

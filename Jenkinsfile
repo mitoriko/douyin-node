@@ -6,12 +6,12 @@ pipeline {
         sh '''if [ ! -d "/cache/"$CACHE"" ];then
 mkdir /cache/"$CACHE";
 fi
-export CACHE=/home/docker/build-cache/"$CACHE"
-echo "$CACHE"
+def REAL_CACHE=/home/docker/build-cache/"$CACHE"
+echo "$REAL_CACHE"
 local_path=`echo ${PWD/var/home}`
 local_path=`echo ${local_path/jenkins_home/"docker/jenkins"}`
 echo "$local_path"
-export REAL_PATH="$local_path"
+def REAL_PATH="$local_path"
 echo "$REAL_PATH"'''
       }
     }
@@ -19,8 +19,9 @@ echo "$REAL_PATH"'''
     stage('build') {
       steps {
         sh '''echo "$REAL_PATH"
-docker run --rm -v "$REAL_PATH":/app -v "$CACHE":/app/node_modules -w /app node:onbuild ls'''
-        sh '''cp -rf $CACHE" node_modules 
+echo "$REAL_CACHE"
+docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild ls'''
+        sh '''cp -rf $REAL_CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
       }
     }
@@ -39,6 +40,5 @@ docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
     DOCKER_USERNAME_USR = 'credentials(\'Docker_Push\')'
     DOCKER_PASSWORD_PSW = 'credentials(\'Docker_Push\')'
     CACHE = 'douyin-node'
-    REAL_PATH = '\'\''
   }
 }

@@ -36,8 +36,9 @@ docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
   environment {
     REGISTRY_URL = 'registry.cn-qingdao.aliyuncs.com'
     REGISTRY_IMAGE = 'a-cubic/douyin-node'
-    DOCKER_USERNAME = 'a_cubic_cloud'
-    DOCKER_PASSWORD = 'Lh82625001'
+    DOCKER_USERNAME_USR = 'credentials(\'Docker_Push\')'
+    DOCKER_PASSWORD_PSW = 'credentials(\'Docker_Push\')'
     CACHE = 'douyin-node'
+    REAL_PATH = ''
   }
 }

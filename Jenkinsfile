@@ -13,7 +13,7 @@ local_path=`echo ${local_path/jenkins_home/"docker/jenkins"}`
 echo "$local_path"
 REAL_PATH="$local_path"
 echo "$REAL_PATH"
-docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild ls
+docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild npm install
 cp -rf $REAL_CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
       }

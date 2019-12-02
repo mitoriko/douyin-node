@@ -2,13 +2,11 @@ FROM node
 
 #RUN apt-get update && apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
-ADD package.json /dy/package.json
-ADD node_modules /dy/node_modules
-ADD server/ /dy/server
+ADD package.json package.json
+ADD node_modules node_modules
+ADD server server
 
-#RUN cd /dy && npm install
-
-WORKDIR /dy/server
+WORKDIR /server
 
 EXPOSE 6565
 

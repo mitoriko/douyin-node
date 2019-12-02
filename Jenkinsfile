@@ -6,12 +6,12 @@ pipeline {
         sh '''if [ ! -d "/cache/"$CACHE"" ];then
 mkdir /cache/"$CACHE";
 fi
-def REAL_CACHE=/home/docker/build-cache/"$CACHE"
+REAL_CACHE=/home/docker/build-cache/"$CACHE"
 echo "$REAL_CACHE"
 local_path=`echo ${PWD/var/home}`
 local_path=`echo ${local_path/jenkins_home/"docker/jenkins"}`
 echo "$local_path"
-def REAL_PATH="$local_path"
+REAL_PATH="$local_path"
 echo "$REAL_PATH"'''
       }
     }

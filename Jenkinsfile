@@ -9,7 +9,7 @@ fi
 export CACHE=/home/docker/build-cache/"$CACHE"
 echo "$CACHE"
 
-export REAL_PATH=`echo ${PWD/"/var/jenkins_home"/"/home/docker/jenkins"}`
+export REAL_PATH=`${PWD/"/var/jenkins_home"/"/home/docker/jenkins"}`
 echo "$REAL_PATH"'''
       }
     }

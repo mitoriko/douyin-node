@@ -12,11 +12,9 @@ local_path=`echo ${PWD/var/home}`
 local_path=`echo ${local_path/jenkins_home/"docker/jenkins"}`
 echo "$local_path"
 REAL_PATH="$local_path"
-echo "$REAL_PATH"'''
-        sh '''echo "$REAL_PATH"
-echo "$REAL_CACHE"
-docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild ls'''
-        sh '''cp -rf $REAL_CACHE" node_modules 
+echo "$REAL_PATH"
+docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild ls
+cp -rf $REAL_CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
       }
     }

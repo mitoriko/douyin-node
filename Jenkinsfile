@@ -19,7 +19,7 @@ echo "$REAL_PATH"'''
     stage('build') {
       steps {
         sh '''echo "$PWD"
-docker run --rm -v "$PWD":/app -v "$CACHE":/app/node_modules -w /app node:onbuild ls'''
+docker run --rm -v "$REAL_PATH":/app -v "$CACHE":/app/node_modules -w /app node:onbuild ls'''
         sh '''cp -rf $CACHE" node_modules 
 docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
       }

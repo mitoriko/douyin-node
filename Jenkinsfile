@@ -8,7 +8,7 @@ mkdir /cache/"$CACHE";
 fi
 export CACHE=/home/docker/build-cache/"$CACHE"
 echo "$CACHE"
-local_path=`echo ${PWD/"/var/jenkins_home"/"/home/docker/jenkins"}`
+local_path=`echo ${PWD/"var/jenkins_home"/"home/docker/jenkins"}`
 echo "$local_path"
 export REAL_PATH="$local_path"
 echo "$REAL_PATH"'''

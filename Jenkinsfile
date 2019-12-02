@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('set-cache') {
+    stage('build') {
       steps {
         sh '''if [ ! -d "/cache/"$CACHE"" ];then
 mkdir /cache/"$CACHE";
@@ -13,11 +13,6 @@ local_path=`echo ${local_path/jenkins_home/"docker/jenkins"}`
 echo "$local_path"
 REAL_PATH="$local_path"
 echo "$REAL_PATH"'''
-      }
-    }
-
-    stage('build') {
-      steps {
         sh '''echo "$REAL_PATH"
 echo "$REAL_CACHE"
 docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild ls'''

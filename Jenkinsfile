@@ -14,15 +14,9 @@ echo "$local_path"
 REAL_PATH="$local_path"
 echo "$REAL_PATH"
 docker run --rm -v "$REAL_PATH":/app -v "$REAL_CACHE":/app/node_modules -w /app node:onbuild npm install
-cp -rf $REAL_CACHE" node_modules 
-docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .'''
-      }
-    }
-
-    stage('update-image') {
-      steps {
-        sh '''docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" "$REGISTRY_URL" && docker push "$REGISTRY_URL"/"$REGISTRY_IMAGE"
-'''
+cp -rf "$REAL_CACHE" node_modules 
+docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .
+docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" "$REGISTRY_URL" && docker push "$REGISTRY_URL"/"$REGISTRY_IMAGE"'''
       }
     }
 
